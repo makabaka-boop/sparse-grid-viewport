@@ -1,0 +1,16 @@
+services:
+  # 一次性验收服务：类型检查 + 单元测试 + 构建 + Playwright 端到端测试
+  verify:
+    build: .
+    image: grid-editor:local
+    command: npm run verify
+    shm_size: 1gb
+
+  # 本地开发服务（可选）：docker compose run --rm --service-ports app
+  app:
+    build: .
+    image: grid-editor:local
+    command: npm run dev -- --host 0.0.0.0
+    ports:
+      - "5173:5173"
+    shm_size: 1gb
