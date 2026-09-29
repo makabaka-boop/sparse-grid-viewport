@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    command: npm run dev
+    ports:
+      - "5173:5173"
+
+  # 一次性验收：tsc 类型检查 + Vitest 单元测试 + Playwright 端到端测试
+  verify:
+    build: .
+    command: npm run verify

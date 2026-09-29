@@ -1,0 +1,150 @@
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-header {
+  padding: 6px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.app-header h1 {
+  font-size: 14px;
+  margin: 0;
+}
+
+.app-header .hint {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.grid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  outline: none;
+}
+
+.grid-main {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+
+/* 滚动容器只负责产生滚动条（spacer 撑出逻辑尺寸），不渲染单元格 */
+.grid-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+
+.grid-spacer {
+  position: relative;
+}
+
+/* 渲染层与滚动容器同步，覆盖在上方；层本身不拦截事件，单元格拦截 */
+.grid-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  background: #fff;
+  padding: 4px 6px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: auto;
+  user-select: none;
+  cursor: cell;
+}
+
+.cell-frozen {
+  background: #f1f5f9;
+  font-weight: 500;
+}
+
+.cell-sel {
+  background: #dbeafe;
+}
+
+.cell-frozen.cell-sel {
+  background: #bfdbfe;
+}
+
+.cell-active {
+  box-shadow: inset 0 0 0 2px #2563eb;
+}
+
+.cell-editor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  border: 2px solid #2563eb;
+  padding: 2px 4px;
+  font: inherit;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.grid-status {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 4px 10px;
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12px;
+}
+
+.grid-status button {
+  font: inherit;
+  padding: 1px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.grid-status button:disabled {
+  color: #94a3b8;
+  cursor: default;
+}
+
+.grid-status .msg {
+  color: #b91c1c;
+}
